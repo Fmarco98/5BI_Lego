@@ -1,0 +1,85 @@
+{
+    "device": {
+        "id": "ruspa-1",
+        "k-chiave": "ABCD",
+        "t-invio": 0.1,
+        "volume-pala": 15
+    },
+    "rete": {
+        "ssid" : "iot",
+        "password": "iotpiotp"
+    },
+    "mqtt": {
+        "client-id": "ruspa-1",
+        "keepalive": 0,
+        "broker": "52.29.230.119",
+        "porta": 1883,
+        "topic_cmd": "iiseuganeoprojects/escavatore/ruspa-1/comandi",
+        "topic_misure": "iiseuganeoprojects/escavatore/ruspa-1/misure"
+    },
+    "info": {
+        "sensori": [
+            {
+                "nome": "ky-032",
+                "pin": {
+                    "V+": "3V3",
+                    "GND": -1,
+                    "S": 28
+                }
+            }
+        ],
+        "relays": [
+            {
+                "nome": "R1",
+                "pin": {
+                    "V+": "Vbus",
+                    "GND": -1,
+                    "S": 22
+                }
+            },
+            {
+                "nome": "R2",
+                "pin": {
+                    "V+": "Vbus",
+                    "GND": -1,
+                    "S": 27
+                }
+            },
+            {
+                "nome": "R3",
+                "pin": {
+                    "V+": "Vbus",
+                    "GND": -1,
+                    "S": 26
+                }
+            }
+        ],
+        "led": [
+            {
+                "nome": "on-led",
+                "pin": {
+                    "S": 0,
+                    "GND": -1
+                }
+            },
+            {
+                "nome": "off-led",
+                "pin": {
+                    "S": 0,
+                    "GND": -1
+                }
+            }
+        ],
+        "motori": [
+            {
+                "nome": "cingolo-DX",
+                "tipo": "lego_mindstorm",
+                "pin": {
+                    "inA": 0,
+                    "inB": 0,
+                    "en": 0
+                }
+            }
+        ]
+    }
+}
