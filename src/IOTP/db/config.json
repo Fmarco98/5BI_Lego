@@ -1,0 +1,18 @@
+{
+    "device": {
+        "k-chiave": "ABCD"
+    },
+    "mqtt": {
+        "keepalive": 60000,
+        "broker": "broker.hivemq.com",
+        "topic_misure": "iiseuganeoprojects/escavatore/ruspa-1/misure",
+        "porta": 1883,
+        "qos": 0
+    },
+    "db": {
+        "uri": "mongodb+srv://marcocasciello:BHs7lcAcbCsn4EuH@cluster0.rdfce.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        "database": "Lego",
+        "collezione_misure": "misure",
+        "collezione_id": "legos"
+    }
+}
