@@ -3,7 +3,7 @@ Modulo dei relays (Relè)
 
 Contenuto
  - class: VoidRelayException
- - class: Relay_4
+ - class: Relay_3
 '''
 import machine
 
@@ -60,9 +60,9 @@ class Relay_3:
         Metodo costruttore.
         
         Parametri:
-         - r1_pin -> pin di controllo del relay 1
-         - r2_pin -> pin di controllo del relay 2
-         - r3_pin -> pin di controllo del relay 3
+         - r1_pin -> int : pin di controllo del relay 1
+         - r2_pin -> int : pin di controllo del relay 2
+         - r3_pin -> int : pin di controllo del relay 3
         '''
         self.__relay_pins = (r1_pin, r2_pin, r3_pin)
         self.__relays = [None, None, None]
@@ -80,8 +80,8 @@ class Relay_3:
         Imposta il nuovo stato del relay:
         
         Parametri:
-         - relay : Relay_3.Components -> numero del relay
-         - stato : Relay_3.States -> nuovo stato
+         - relay -> Relay_3.Components : numero del relay
+         - stato -> Relay_3.States : nuovo stato
         '''
         # Controllo Se il relay non è allocato
         if not self.__relays[relay]:

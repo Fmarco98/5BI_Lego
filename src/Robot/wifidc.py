@@ -32,4 +32,3 @@ def connetti(ssid, password):
             return 3
     
     return wlan.status()
-    

@@ -1,9 +1,11 @@
 {
     "device": {
         "id": "ruspa-1",
+        "tipo": "Escavatore da miniera",
+        "descrizione": "Robot di estrazione mineraria cingolato",
         "k-chiave": "ABCD",
         "t-invio": 0.1,
-        "volume-pala": 15
+        "q-pala": 15
     },
     "rete": {
         "ssid" : "iot",
@@ -12,7 +14,7 @@
     "mqtt": {
         "client-id": "ruspa-1",
         "keepalive": 0,
-        "broker": "52.29.230.119",
+        "broker": "3.124.233.148",
         "porta": 1883,
         "topic_cmd": "iiseuganeoprojects/escavatore/ruspa-1/comandi",
         "topic_misure": "iiseuganeoprojects/escavatore/ruspa-1/misure"
@@ -20,7 +22,8 @@
     "info": {
         "sensori": [
             {
-                "nome": "ky-032",
+                "nome": "rilevatore pale",
+                "tipo": "ky-032",
                 "pin": {
                     "V+": "3V3",
                     "GND": -1,
@@ -31,6 +34,7 @@
         "relays": [
             {
                 "nome": "R1",
+                "tipo": "ky: relays module",
                 "pin": {
                     "V+": "Vbus",
                     "GND": -1,
@@ -39,6 +43,7 @@
             },
             {
                 "nome": "R2",
+                "tipo": "ky: relays module",
                 "pin": {
                     "V+": "Vbus",
                     "GND": -1,
@@ -47,6 +52,7 @@
             },
             {
                 "nome": "R3",
+                "tipo": "ky: relays module",
                 "pin": {
                     "V+": "Vbus",
                     "GND": -1,
@@ -57,15 +63,17 @@
         "led": [
             {
                 "nome": "on-led",
+                "tipo": "led",
                 "pin": {
-                    "S": 0,
+                    "S": 16,
                     "GND": -1
                 }
             },
             {
                 "nome": "off-led",
+                "tipo": "led",
                 "pin": {
-                    "S": 0,
+                    "S": 17,
                     "GND": -1
                 }
             }
@@ -75,10 +83,69 @@
                 "nome": "cingolo-DX",
                 "tipo": "lego_mindstorm",
                 "pin": {
-                    "inA": 0,
-                    "inB": 0,
-                    "en": 0
+                    "inA": 11,
+                    "inB": 10,
+                    "en": -1
                 }
+            },
+            {
+                "nome": "cingolo-SX",
+                "tipo": "lego_mindstorm",
+                "pin": {
+                    "inA": 13,
+                    "inB": 12,
+                    "en": -1
+                }
+            },
+            {
+                "nome": "pistoni",
+                "tipo": "lego_mindstorm",
+                "pin": {
+                    "inA": 7,
+                    "inB": 6,
+                    "en": -1
+                }
+            },
+            {
+                "nome": "scarico",
+                "tipo": "lego_powerline",
+                "pin": {
+                    "inA": 9,
+                    "inB": 8,
+                    "en": 14
+                }
+            },
+            {
+                "nome": "scava",
+                "tipo": "lego_mindstorm",
+                "pin": {
+                    "inA": 4,
+                    "inB": 3,
+                    "en": 5
+                }
+            },
+            {
+                "nome": "nastro",
+                "tipo": "lego_mindstorm",
+                "pin": {
+                    "inA": 1,
+                    "inB": 0,
+                    "en": 2
+                }
+            }
+        ],
+        "schede": [
+            {
+                "nome": "bridge-1",
+                "tipo": "L298N"
+            },
+            {
+                "nome": "bridge-2",
+                "tipo": "L298N"
+            },
+            {
+                "nome": "bridge-3",
+                "tipo": "L298N"
             }
         ]
     }

@@ -9,8 +9,6 @@ Funzioni:
  - errore_led(..)
  - setup_led(..)
 
-Decorators:
- - motion(..)
 '''
 import machine
 import time
@@ -21,24 +19,67 @@ import socket
 LED = None
 
 class Config_schema:
+    '''
+    Config schema
+    
+    Elementi:
+     - rete
+     - mqtt
+     - info -> class
+     - device -> class
+    '''
     rete = None
     mqtt = None
+    device = None
     
     class info:
+        '''
+        Config schema (area "info")
+        
+        Elementi:
+         - relays
+         - motori
+         - sensori
+         - led
+         - schede
+        '''
         relays = None
         mortori = None
         sensori = None
         led = None
+        schede = None
     
-    class device:
-        k_chiave = None
-        t_invio = None
-        id = None
-
+    def get_struttura_dict(conf):
+        '''
+        Parsing della struttura a formato dizionario
+        
+        Parametri:
+         - conf -> Config_schema : config
+        
+        Ritorna:
+         struttura -> dict : struttura formato json
+        '''
+        return {
+            "motori": conf.info.motori,
+            "relays": conf.info.relays,
+            "sensori": conf.info.sensori,
+            "led": conf.info.led,
+            "schede": conf.info.schede 
+        }
+    
 class Logger:
+    '''
+    Classe statica logger.
+    
+    Funzioni:
+     - log(..)
+    '''
     def log(msg):
         '''
-        Log di un messaggio
+        Log di un messaggio.
+        
+        Parametri:
+         - msg -> str : messaggio
         '''
         (aaaa, mm, dd, h, m, s, wd, yd) = time.localtime()
         print(f'[{dd}/{mm}/{aaaa}-{h}:{m}:{s}][thread-{threading.get_ident()}]: {msg}')
@@ -48,7 +89,7 @@ def setup_led(pin):
     Setup del led
     
     Parametri:
-     - led -> pin del led
+     - led -> int : pin del led
     '''
     global LED
     
@@ -64,7 +105,7 @@ def errore_led(id):
      - 9 lampeggi: file json manchanti o non validi [id: 9]
     
     Parametri:
-     - id: numero indenticifativo dell'errore
+     - id -> int : numero indenticifativo dell'errore
     '''
     print(f'Errore: {id}') 
     
@@ -82,17 +123,3 @@ def errore_led(id):
                 LED.off()
                 time.sleep(0.2)
             time.sleep(2)
-
-def get_IP_from_FQDN(fqdn):
-    return socket.gethostbyname(fqdn)
-
-'''
-def motion(attivita):
-    def decorator(f):
-        def wrapper():
-            Logger.log(f'inizio attività - {attivita}')
-            f()
-            Logger.log(f'fine attività - {attivita}')
-    
-        return wrapper
-    return decorator'''
