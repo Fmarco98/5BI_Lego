@@ -1,0 +1,42 @@
+{
+ "tipo": "misura", 
+ "payload": {
+  "seriale": 2, 
+  "timestamp": 1749068759, 
+  "quantita": 0, 
+  "quantita_tot": 15
+ }, 
+ "sender": {
+  "tipo": "Escavatore da miniera", 
+  "stato": 0, 
+  "nome": "ruspa-1", 
+  "descrizione": "Robot di estrazione mineraria cingolato", 
+  "struttura": {
+   "schede": [
+    {"nome": "bridge-1", "tipo": "L298N"},
+    {"nome": "bridge-2", "tipo": "L298N"},
+    {"nome": "bridge-3", "tipo": "L298N"}
+   ], 
+   "sensori": [
+    {"nome": "rilevatore pale", "tipo": "ky-032"}
+   ], 
+   "relays": [
+    {"nome": "R1", "tipo": "ky: relays module"},
+    {"nome": "R2", "tipo": "ky: relays module"},
+    {"nome": "R3", "tipo": "ky: relays module"}
+   ], 
+   "motori": [
+    {"nome": "cingolo-DX", "tipo": "lego_mindstorm"}, 
+    {"nome": "cingolo-SX", "tipo": "lego_mindstorm"},
+    {"nome": "pistoni", "tipo": "lego_mindstorm"},
+    {"nome": "scarico", "tipo": "lego_powerline"},
+    {"nome": "scava", "tipo": "lego_mindstorm"},
+    {"nome": "nastro", "tipo": "lego_mindstorm"}
+   ],
+   "led": [
+    {"nome": "on-led", "tipo": "led"}, 
+    {"nome": "off-led", "tipo": "led"}
+   ]
+  }
+ }
+}
