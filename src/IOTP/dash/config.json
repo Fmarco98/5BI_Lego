@@ -1,0 +1,17 @@
+{
+    "device": {
+        "k-chiave": "ABCD"
+    },
+    "mqtt": {
+        "keepalive": 60000,
+        "broker": "192.168.5.37",
+        "topic_misure": "iiseuganeoprojects/escavatore/ruspa-1/misure",
+        "topic_comandi": "iiseuganeoprojects/escavatore/ruspa-1/comandi",
+        "porta": 1883,
+        "qos": 0
+    },
+    "server": {
+        "hostname": "localhost",
+        "porta": 8080
+    }
+}

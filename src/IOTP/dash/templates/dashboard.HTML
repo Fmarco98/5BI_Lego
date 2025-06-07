@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard LEGO BWE</title>
+    <link rel="stylesheet" href="../static/style.CSS">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Controllo LEGO Bucket Wheel Excavator</h1>
+    </header>
+
+    <div class="main-container">
+        <div class="controls-column">
+            <div class="aligned-section-group">
+                <div class="control-section">
+                    <h2>Movimento Base</h2>
+                    <div class="joystick-grid">
+                        <div></div>
+                        <form action="{{ url_for('move_forward') }}" method="post" class="btn-forward">
+                            <button type="submit">&#x2191;</button>
+                        </form>
+                        <div></div>
+
+                        <form action="{{ url_for('turn_left') }}" method="post" class="btn-left">
+                            <button type="submit">&#x2190;</button>
+                        </form>
+                        <form action="{{ url_for('stop_movement') }}" method="post" class="btn-stop">
+                            <button type="submit" class="stop">STOP</button>
+                        </form>
+                        <form action="{{ url_for('turn_right') }}" method="post" class="btn-right">
+                            <button type="submit">&#x2192;</button>
+                        </form>
+
+                        <div></div>
+                        <form action="{{ url_for('move_backward') }}" method="post" class="btn-backward">
+                            <button type="submit">&#x2193;</button>
+                        </form>
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Rotazione Scarico</h2>
+                    <div class="button-group">
+                        <form action="{{ url_for('discharge_rotate_right') }}" method="post"><button type="submit">Scarico Dx <span class="rotate-arrow-right">&#x21BB;</span></button></form>
+                        <form action="{{ url_for('discharge_rotate_left') }}" method="post"><button type="submit">Scarico Sx <span class="rotate-arrow-left">&#x21BB;</span></button></form>
+                    </div>
+                    <div class="button-group two-rows">
+                        <form action="{{ url_for('stop_discharge_rotation') }}" method="post"><button type="submit" class="stop">Stop Rot. Scarico</button></form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="aligned-section-group">
+                <div class="control-section">
+                    <h2>Rotazione Torre</h2>
+                    <div class="button-group">
+                        <form action="{{ url_for('rotate_tower_right') }}" method="post"><button type="submit">Rot. Dx <span class="rotate-arrow-right">&#x21BB;</span></button></form>
+                        <form action="{{ url_for('rotate_tower_left') }}" method="post"><button type="submit">Rot. Sx <span class="rotate-arrow-left">&#x21BB;</span></button></form>
+                    </div>
+                    <div class="button-group two-rows">
+                        <form action="{{ url_for('stop_tower_rotation') }}" method="post"><button type="submit" class="stop">Stop Rot. Torre</button></form>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Ruota Scavatrice</h2>
+                    <div class="button-group">
+                        <form action="{{ url_for('digger_wheel_on') }}" method="post"><button type="submit">Accendi</button></form>
+                        <form action="{{ url_for('digger_wheel_off') }}" method="post"><button type="submit" class="stop">Spegni</button></form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="aligned-section-group">
+                <div class="control-section">
+                    <h2>Pistoni</h2>
+                    <div class="button-group">
+                        <form action="{{ url_for('pistons_up') }}" method="post"><button type="submit">Up</button></form>
+                        <form action="{{ url_for('pistons_down') }}" method="post"><button type="submit">Down</button></form>
+                    </div>
+                    <div class="button-group two-rows">
+                        <form action="{{ url_for('stop_pistons') }}" method="post"><button type="submit" class="stop">Stop Pistoni</button></form>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Alimentazione LEGO</h2>
+                    <div class="button-group">
+                        <form action="{{ url_for('lego_power_on') }}" method="post"><button type="submit" class="power">Accendi LEGO</button></form>
+                        <form action="{{ url_for('lego_power_off') }}" method="post"><button type="submit" class="power-off">Spegni LEGO</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-column">
+            <div class="control-section">
+                <h2>Quantità Scavata</h2>
+                <p>Quantità Attuale: <span id="dugQuantityDisplay">{{ current_dug_quantity }}</span> unità</p>
+                <div class="button-group">
+                    <form action="{{ url_for('save_dug_quantity') }}" method="post">
+                        <button type="submit">Archivia Misura</button>
+                    </form>
+                    <button type="button" class="history-button" onclick="showHistory()">Mostra Storico</button>
+                </div>
+                <h3>Storico Misure:</h3>
+                <ul id="historyList">
+                    <li>Nessuna misura nello storico.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LEGO BWE Control Dashboard. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        // Funzione per aggiornare la quantità scavata (non più lo stato MQTT visibile)
+        function updateDashboardStatus() {
+            fetch('/get_dashboard_status')
+                .then(response => response.json())
+                .then(data => {
+                    const dugQuantityDisplay = document.getElementById('dugQuantityDisplay');
+                    dugQuantityDisplay.textContent = data.current_dug_quantity;
+                })
+                .catch(error => console.error('Errore nel recupero dello stato della dashboard:', error));
+        }
+
+        // Funzione per mostrare lo storico delle misurazioni (invariata)
+        function showHistory() {
+            fetch('/get_dug_history')
+                .then(response => response.json())
+                .then(data => {
+                    const historyList = document.getElementById('historyList');
+                    historyList.innerHTML = '';
+
+                    if (data.length === 0) {
+                        historyList.innerHTML = '<li>Nessuna misura nello storico.</li>';
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = `Quantità: ${item.quantity} - Data: ${item.timestamp}`;
+                        historyList.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error('Errore nel recupero dello storico:', error);
+                    const historyList = document.getElementById('historyList');
+                    historyList.innerHTML = '<li>Errore nel caricamento dello storico.</li>';
+                });
+        }
+
+        // Aggiorna lo stato e la quantità ogni 3 secondi
+        setInterval(updateDashboardStatus, 3000);
+
+        // Chiamate iniziali all'apertura della pagina
+        document.addEventListener('DOMContentLoaded', updateDashboardStatus);
+        document.addEventListener('DOMContentLoaded', showHistory);
+    </script>
+</body>
+</html>

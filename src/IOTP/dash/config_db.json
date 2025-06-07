@@ -1,0 +1,6 @@
+{
+    "uri": "mongodb+srv://marcocasciello:BHs7lcAcbCsn4EuH@cluster0.rdfce.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "database": "Lego",
+    "collezione_misure": "misure",
+    "collezione_id": "legos"
+}

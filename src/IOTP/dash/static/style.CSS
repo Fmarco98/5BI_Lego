@@ -1,0 +1,364 @@
+/* General Body and Main Container Styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e9ecef;
+    color: #343a40;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.8em;
+    color: white;
+}
+
+.main-container {
+    flex-grow: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+    background-color: #ffffff;
+    /* RIPRISTINATO: Padding originale */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* RIPRISTINATO: Gap originale */
+    gap: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Linea Divisoria Estetica */
+.main-container::before {
+    content: '';
+    position: absolute;
+    /* RIPRISTINATO: Posizione originale della linea divisoria */
+    left: 66.66%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #ced4da, #007bff, #ced4da);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.controls-column {
+    /* RIPRISTINATO: Padding originale */
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.data-column {
+    /* RIPRISTINATO: Padding originale */
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+
+/* Stili generici per tutti i control-section - NON TOCCATI, DEVONO ESSERE COME DA ULTIMA VERSIONE VALIDA */
+.control-section {
+    border: 1px solid #e0e0e0;
+    padding: 15px 10px; /* Lasciato come era nel tuo ultimo file caricato */
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Questo allineamento generale era "center" nel tuo ultimo file caricato */
+    min-height: 165px; /* Lasciato come era nel tuo ultimo file caricato */
+    box-sizing: border-box;
+}
+
+/* MODIFICHE SPECIFICHE PER RIMUOVERE IL RIQUADRO DAL "MOVIMENTO BASE" */
+/* Seleziona il primo .control-section all'interno di .controls-column */
+.controls-column > .control-section:first-child {
+    border: none; /* Rimuove il bordo */
+    background-color: transparent; /* Rimuove lo sfondo */
+    box-shadow: none; /* Rimuove l'ombra */
+    padding: 0; /* Rimuove il padding del riquadro */
+    min-height: auto; /* Permette al riquadro di adattarsi al contenuto */
+    /* Assicurati che gli elementi interni (titolo e joystick) siano centrati */
+    align-items: center; /* Centra orizzontalmente gli elementi interni */
+}
+
+h2 {
+    text-align: center;
+    color: #343a40;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* Joystick Layout for Base Movement */
+.joystick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0px;
+    /* MANTENUTO: max-width con calc, ma con un margine di sicurezza leggermente aumentato */
+    max-width: calc(100% - 20px); /* 100% del contenitore meno 20px di margine totale (10px per lato) */
+    margin: 10px auto; /* Centra il joystick e aggiunge margine sopra/sotto */
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Assicurati che gli elementi 'div' vuoti non causino problemi */
+.joystick-grid > div {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+/* Forze i tag <form> ad essere inline-block per non influenzare il layout Grid */
+.joystick-grid form {
+    display: contents;
+}
+
+.joystick-grid button {
+    /* MODIFICATO: Riduci leggermente la larghezza, aumenta l'altezza */
+    width: 36px; /* Era 40px, proviamo 36px */
+    height: 42px; /* Era 40px, aumentiamo per renderli meno schiacciati */
+    padding: 0;
+    /* MANTENUTO: Font leggermente più grande */
+    font-size: 1.0em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+.joystick-grid button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.joystick-grid .btn-forward { grid-area: 1 / 2 / 2 / 3; }
+.joystick-grid .btn-left    { grid-area: 2 / 1 / 3 / 2; }
+.joystick-grid .btn-stop    { grid-area: 2 / 2 / 3 / 3; background-color: #dc3545;}
+.joystick-grid .btn-stop:hover { background-color: #c82333; }
+.joystick-grid .btn-right   { grid-area: 2 / 3 / 3 / 4; }
+.joystick-grid .btn-backward{ grid-area: 3 / 2 / 4 / 3; }
+
+
+/* General Button Group Styles */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+button {
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+    min-width: 90px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+button.stop {
+    background-color: #dc3545;
+}
+button.stop:hover {
+    background-color: #c82333;
+}
+button.power {
+    background-color: #28a745;
+}
+button.power:hover {
+    background-color: #218838;
+}
+button.power-off {
+    background-color: #ffc107;
+    color: #333;
+}
+button.power-off:hover {
+    background-color: #e0a800;
+}
+.rotate-arrow-right {
+    font-size: 16px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.rotate-arrow-left {
+    font-size: 16px;
+    vertical-align: middle;
+    display: inline-block;
+    transform: scaleX(-1);
+}
+
+/* Layout per le sezioni affiancate */
+.aligned-section-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Stili specifici per i pulsanti di Stop sotto */
+.button-group.two-rows {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+.button-group.two-rows button {
+    min-width: 120px;
+    padding: 7px 12px;
+    font-size: 13px;
+}
+
+
+/* Data Display Styles */
+#dugQuantityDisplay {
+    font-size: 2.0em;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+    color: #007bff;
+    background-color: #e9f5ff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #b3d9ff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+#historyList {
+    list-style: none;
+    padding: 0;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+}
+#historyList li {
+    padding: 7px 10px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 0.85em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#historyList li:last-child {
+    border-bottom: none;
+}
+#historyList li:nth-child(even) {
+    background-color: #f5f5f5;
+}
+.history-button {
+    margin-top: 8px;
+    background-color: #6c757d;
+}
+.history-button:hover {
+    background-color: #5a6268;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    margin-top: auto;
+    font-size: 0.9em;
+    border-top: 1px solid #495057;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+    .main-container::before {
+        display: none;
+    }
+    .controls-column {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+        padding-right: 0;
+        padding-bottom: 15px;
+        gap: 15px;
+    }
+    .data-column {
+        padding-left: 0;
+        padding-top: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .aligned-section-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    /* MODIFICHE SPECIFICHE PER RIMUOVERE IL RIQUADRO DAL "MOVIMENTO BASE" SU MOBILE */
+    .controls-column > .control-section:first-child {
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        min-height: auto;
+        align-items: center;
+    }
+    .joystick-grid {
+        /* MANTENUTO: max-width con calc, ma con un margine di sicurezza leggermente aumentato */
+        max-width: calc(100% - 16px); /* 100% del contenitore meno 16px di margine totale (8px per lato) */
+        margin: 10px auto; /* Centra il joystick anche su mobile */
+    }
+    .joystick-grid button {
+        width: 32px; /* Adattato per schermi piccoli */
+        height: 38px; /* Altezza aumentata per il mobile */
+        font-size: 0.9em;
+    }
+    button {
+        min-width: 70px;
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+    .button-group.two-rows button {
+        min-width: 90px;
+        font-size: 12px;
+    }
+}
